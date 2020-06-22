@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Profile</title>
+	<meta charset="UTF-8">
+    {% load static %}
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/flaticon.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/s.css' %}"/>
+
+
+	<!--[if lt IE 9]>
+	<![endif]-->
+
+</head>
+<body>
+	<!-- Page Preloder -->
+
+	<div class="home-two-style">
+		<!-- Header section start -->
+		<br>
+		<a href="/user/index/" class="site-btn">HOME</a>
+		<!-- Header section end -->
+
+		<!-- Hero section start -->
+		<section class="hero-section spad">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xl-10 offset-xl-1">
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="hero-info">
+									<h2>Profile</h2>
+									<ul>
+                                        <li><span>Username</span>{{ username }}</li>
+                                        <li><span>Password</span>{{ password }}</li>
+										<li><span>Date of Birth</span>{{ bdate }}</li>
+										<li><span>Gender</span>{{ gender }}</li>
+										<li><span>E-mail</span>{{ email }}</li>
+										<li><span>Phone </span>{{ mono }}</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-lg-6 text-md-center">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Hero section end -->
+
+			</div>
+</body>
+</html>

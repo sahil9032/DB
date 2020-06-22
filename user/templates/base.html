@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1b8ba3dee0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+    <script src="{% static 'js/main.js' %}"></script>
+</head>
+<body>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">File Upload</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form class="md-form" action="/user/upload/" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="file-field">
+                      <div class="btn btn-primary">
+                        <input type="file" name="myfile">
+                      </div>
+                        <input class="btn btn-primary" type="submit" name="submit" value="upload">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
+<header>
+    <div class="logo">
+        <h1>Drive</h1>
+    </div>
+    <div class="search">
+
+    </div>
+    <div class="help">
+
+    </div>
+    <div class="setting">
+
+    </div>
+    <div class="more">
+
+    </div>
+    <div class="profile">
+
+    </div>
+    <div class="logout">
+        <a href="/user/profile/">Profile</a>
+    </div>
+    <div class="logout">
+        <a href="/user/logout/">Log out</a>
+    </div>
+</header>
+<main>
+    <div class="sidebar">
+        <div class="dropdown">
+            <button onmouseover="myFunction()" class="dropbtn">
+                <i class="fas fa-plus"></i>
+                <h3>New</h3>
+            </button>
+            <div id="myDropdown" class="dropdown-content">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">File upload</button>
+                <button id="newfolder" onclick='createFolder("{{ csrf_token }}")'>Folder</button>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="nav">
+            <div class="drive">
+                <h3>My Drive</h3>
+            </div>
+            <div class="info">
+            </div>
+        </div>
+        <div class="my-Content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</main>
+</body>
+
+</div>
+</html>

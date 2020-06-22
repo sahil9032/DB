@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <title>Home</title>
+</head>
+<body>
+{% block content %}
+    {% if messages %}
+        <script>alert("{{ messages }}")</script>
+    {% endif %}
+    <div class="container" id="drive-background">
+        <div class="col-md-12">
+            <p>
+                {% for p in path %}
+                    <label style="cursor:pointer" onclick='o("{{ p.location }}", "{{ csrf_token }}")'>{{ p.label }}/</label>
+                {% endfor %}
+            </p>
+        </div>
+        <div class="col-md-12">
+            <p>Folders</p>
+        </div>
+        <div class="folder-list col-md-12">
+            {% for folder in folders %}
+                <div class="folder col-md-2" foldername="{{ folder.name }}" data-toggle="modal"
+                     data-target='#fmodal{{ folder.id }}'>
+                    <div class="body">
+                        {{ folder.name }}
+                    </div>
+                </div>
+                <div class="modal fade" id="fmodal{{ folder.id }}" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">File Upload</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <button class="btn btn-primary"
+                                        onclick='o("{{ folder.location }}", "{{ csrf_token }}")'>Open
+                                </button>
+                                <button class="btn btn-success"
+                                        onclick='fr("{{ folder.location }}", "{{ csrf_token }}")'>Rename
+                                </button>
+                                <button class="btn btn-danger"
+                                        onclick='fdel("{{ folder.location }}", "{{ csrf_token }}")'>Delete
+                                </button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-12">
+            <p>Files</p>
+        </div>
+        <div class="file-list col-md-12">
+            {% for file in files %}
+                <div class="file col-md-2" filename="{{ file.name }}" data-toggle="modal"
+                     data-target='#modal{{ file.id }}'>
+                    <div class="body">
+                        {{ file.read }}
+                    </div>
+                    <div class="head">
+                        {{ file.name }}
+                    </div>
+                </div>
+                <div class="modal fade" id="modal{{ file.id }}" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">File Upload</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <button class="btn btn-primary"
+                                            onclick='download("{{ file.location }}", "{{ csrf_token }}")'>Download
+                                    </button>
+                                    <button class="btn btn-success"
+                                            onclick='rename("{{ file.location }}", "{{ csrf_token }}")'>Rename
+                                    </button>
+                                    <button class="btn btn-danger"
+                                            onclick='del("{{ file.location }}", "{{ csrf_token }}")'>Delete
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+</body>
+</html>
